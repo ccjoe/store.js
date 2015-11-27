@@ -34,6 +34,7 @@
         });
     };
     /**
+     * 通过store.js来提供便利化操作localStorage的api,并引入过期机制
      * @namespace store
      */
     store = {
@@ -122,7 +123,7 @@
         },
         /**
          * 清除所有store存储
-         * @method store.del
+         * @method store.cls
          * @param {string} key string
          * @return store
          */
