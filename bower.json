@@ -1,0 +1,28 @@
+{
+  "name": "store.js",
+  "main": "store.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/ccjoe/store.js",
+  "description": "封装localstorage的api,并引入expires",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "localstorage",
+    "store",
+    "expire"
+  ],
+  "authors": [
+    "ccjoe"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
