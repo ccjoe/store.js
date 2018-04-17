@@ -33,6 +33,7 @@ export default {
         });
     },
     /**
+<<<<<<< HEAD
      * 遍历 store (不包含已过期的)
      * @method store.each
      * @param {function} callback 参数为key, val
@@ -92,6 +93,103 @@ export default {
     set: function(key, val, expire){
         if(typeof key === 'string'){
             storage.setItem(key, bindtime(val, expire));
+=======
+     * 通过store.js来提供便利化操作localStorage的api,并引入过期机制
+     * @namespace store
+     */
+    store = {
+        on: function(callback){
+            window.addEventListener('storage', function(e) {
+                callback(e);
+            });
+        },
+        /**
+         * 遍历 store (不包含已过期的)
+         * @method store.each
+         * @param {function} callback 参数为key, val
+         */
+        each: function(callback){
+            var that = this;
+            for(var i=0; i<storage.length; i++){
+                key = storage.key[i];
+                val =  that.noexpire(key);
+                if(val){
+                    callback(key, val);
+                }
+            }
+        },
+        /**
+         * 判断key是否过期，没有返回key的值，过期返回false
+         * @method store.noexpire
+         * @param {string} key
+         * @return noexpire
+         */
+        noexpire: function(key){
+            if(key===void 0){
+                return null;
+            }
+            var now = new Date().getTime(),
+                data = parseval(storage.getItem(key));
+            if(!data) return null;
+            if(data.expire !== void 0 && data.expire <= now){
+                this.del(key);
+                return null;
+            }
+            return data.value;
+        },
+        /**
+         * 通过key获取store的value值(不包含过期的)
+         * @method store.get
+         * @param {string} key 可以为string或空，为空时取所有的localstorage
+         * @return vaule || object
+         */
+        get: function(key){
+            if(key){
+                return this.noexpire(key);
+            }
+            var ret = {};
+            this.each(function(key, val){
+                ret[key] = val;
+            });
+            return ret;
+        },
+        /**
+         * 设置store键值对及过期时间
+         * @method Cora.store.set
+         * @param {string} key
+         * @param {object} val OR(string)
+         * @param {expire} expire 过期时间，此刻起的millsecond数 1000*60=1min后过期
+         */
+        set: function(key, val, expire){
+            if(typeof key === 'string'){
+                storage.setItem(key, bindtime(val, expire));
+                return this;
+            }
+            var data = key;
+            for (var k in data) {
+                val = data[k];
+                this.set(k, val, expire);
+            }
+        },
+        /**
+         * 删除store某个key及值
+         * @method store.del
+         * @param {string} key string
+         * @return store
+         */
+        del: function(key){
+            storage.removeItem(key);
+            return this;
+        },
+        /**
+         * 清除所有store存储
+         * @method store.cls
+         * @param {string} key string
+         * @return store
+         */
+        cls:function(){
+            storage.clear();
+>>>>>>> 256080a621f255b94923882d4d5b6f6ae91a4cb0
             return this;
         }
         var data = key;

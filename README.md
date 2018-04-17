@@ -3,6 +3,7 @@
 ## store : <code>object</code>
 **Kind**: global namespace
 
+<<<<<<< HEAD
 * [store](#store) : <code>object</code>
     * [.each(callback)](#store.each)
     * [.expired(key)](#store.expired) ⇒
@@ -107,6 +108,9 @@
 | Param | Type | Description |
 | --- | --- | --- |
 | unit | <code>string</code> | 单位默认返回bytes,可以为KB, MB; |
+=======
+API见： [http://ccjoe.github.io/jsdoc/store/store.html](http://ccjoe.github.io/jsdoc/store/store.html)
+>>>>>>> 256080a621f255b94923882d4d5b6f6ae91a4cb0
 
 
 ## Licence ##
